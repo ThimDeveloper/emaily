@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../utils/test.js"],"names":["test","module","exports"],"mappings":";;AAAA,IAAMA,IAAI,GAAG,EAAb;AAEAC,MAAM,CAACC,OAAP,GAAiBF,IAAjB","sourcesContent":["const test = 10;\n\nmodule.exports = test;\n"],"file":"test.js"}

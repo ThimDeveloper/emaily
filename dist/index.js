@@ -15,5 +15,4 @@ app.get("/", function (req, res) {
 var PORT = process.env.PORT || 5000;
 app.listen(PORT, function () {
   console.log("App is listening on port: ".concat(PORT));
-});
-//# sourceMappingURL=index.js.map
+}); //"build": "npm run clean && babel -d ./dist ./ -s --ignore 'node_modules'",
