@@ -1,0 +1,3 @@
+const test = 10;
+
+module.exports = test;

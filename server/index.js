@@ -1,4 +1,5 @@
 import express from "express";
+import test from "./utils/test";
 
 const app = express();
 
