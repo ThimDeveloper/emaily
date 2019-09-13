@@ -5,6 +5,19 @@ import mongoose from 'mongoose';
 
 const User = mongoose.model('users');
 
+passport.serializeUser((user, done) => {
+  // user.id is here is the internal object id of the user assigned to the user object in MongoDB.
+  // here we take the internal user.id and serialize it (hash it) for client to use when sending request to the server.
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  // Id here is the serialized id of a user
+  User.findById(id).then(user => {
+    done(null, user);
+  });
+});
+
 passport.use(
   new GoogleStrategy(
     {
@@ -19,6 +32,7 @@ passport.use(
           //console.log('User already exists.');
           done(null, existingUser);
         } else {
+          // profile.id is the google user id
           new User({
             googleID: profile.id
           })
