@@ -11,7 +11,3 @@ module.exports = {
   mongoURI,
   cookieKey
 };
-
-//   
-
-mongodb+srv://herokuAdmin:unUVudqNAnmXKsqO@cluster0-2clps.mongodb.net/test?retryWrites=true&w=majority
