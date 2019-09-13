@@ -1,13 +1,13 @@
-import express from "express";
-import "./services/passport";
-import withAuthRoutes from "./routes/authRoutes";
-import { mongoUri } from "../config/keys";
-import mongoose from "mongoose";
+import express from 'express';
+import mongoose from 'mongoose';
+import './models/User';
+import './services/passport';
+import { mongoURI } from './config/keys';
+import withAuthRoutes from './routes/authRoutes';
 
-mongoose.connect(mongoUri);
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
-
 withAuthRoutes(app);
 
 const PORT = process.env.PORT || 5000;
