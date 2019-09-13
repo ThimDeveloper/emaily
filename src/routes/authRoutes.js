@@ -1,9 +1,11 @@
 import passport from 'passport';
 
 module.exports = app => {
+  /*
   app.get('/', (req, res) => {
     res.send({ Message: 'Hello from heroku' });
   });
+  */
   // The string "google" is an internal identifier used by passport to use GoogleStrategy
   app.get(
     '/auth/google',

@@ -1,8 +1,8 @@
 const conversionTable = {
-  d: 86400000,
-  h: 3600000,
-  m: 60000,
-  s: 1000
+  day: 86400000,
+  hour: 3600000,
+  min: 60000,
+  sec: 1000
 };
 
 const isAlphabetical = unit => {

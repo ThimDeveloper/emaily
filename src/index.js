@@ -8,6 +8,7 @@ import './models/User';
 import './services/passport';
 import { mongoURI, cookieKey } from './config/keys';
 import withAuthRoutes from './routes/authRoutes';
+import withProductionClient from './routes/withProductionClient';
 
 try {
   mongoose.connect(mongoURI, {
@@ -15,12 +16,13 @@ try {
     useUnifiedTopology: true
   });
 } catch (error) {
+  console.error('MONGOOSE CONNECTION ERROR IN INDEX');
   console.log(error);
 }
 
 const app = express();
 
-const cookieAge = toMilliSecond('d', 30);
+const cookieAge = toMilliSecond('day', 30);
 
 // MIDDLEWARE (adding functionality and process request to the application)
 // Cookie session options object
@@ -30,11 +32,11 @@ app.use(
     keys: [cookieKey]
   })
 );
-
 // Initialize passport and session management
 app.use(passport.initialize());
 app.use(passport.session());
 
+withProductionClient(app);
 withAuthRoutes(app);
 
 const PORT = process.env.PORT || 5000;
