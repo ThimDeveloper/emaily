@@ -23,7 +23,8 @@ passport.use(
     {
       clientID: googleClientID,
       clientSecret: googleClientSecret,
-      callbackURL: 'http://localhost:5000/auth/google/callback'
+      callbackURL: '/auth/google/callback',
+      proxy: true
     },
     // Obtain the user information and save it to a database
     (accessToken, refreshToken, profile, done) => {
