@@ -1,6 +1,5 @@
 import express from 'express';
 import mongoose from 'mongoose';
-
 import cookieSession from 'cookie-session';
 // Import passport to tell passport to make use of cookie sessions
 import passport from 'passport';
@@ -10,7 +9,14 @@ import './services/passport';
 import { mongoURI, cookieKey } from './config/keys';
 import withAuthRoutes from './routes/authRoutes';
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+try {
+  mongoose.connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+} catch (error) {
+  console.log(error);
+}
 
 const app = express();
 
