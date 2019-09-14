@@ -1,11 +1,10 @@
 import passport from 'passport';
 
 module.exports = app => {
-  /*
   app.get('/', (req, res) => {
     res.send({ Message: 'Hello from heroku' });
   });
-  */
+
   // The string "google" is an internal identifier used by passport to use GoogleStrategy
   app.get(
     '/auth/google',
@@ -15,7 +14,14 @@ module.exports = app => {
   );
 
   // The user has the code, passport exchange the code for user profile information
-  app.get('/auth/google/callback', passport.authenticate('google'));
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google'),
+    (req, res) => {
+      console.log(req);
+      res.send('Authenticated user');
+    }
+  );
 
   // End point for extracting the current user data if cookie is properly set. (Passport automatically sets the user to the request object)
   app.get('/api/current_user', (req, res) => {
