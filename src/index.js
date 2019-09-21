@@ -6,12 +6,12 @@ import bodyParser from 'body-parser';
 import passport from 'passport';
 import toMilliSecond from './utils/timeConverter';
 import './models/User';
+import './models/Survey';
 import './services/passport';
 import { mongoURI, cookieKey } from './config/keys';
 import withAuthRoutes from './routes/authRoutes';
 import withBillingRoutes from './routes/billingRoutes';
 import withProductionClient from './routes/withProductionClient';
-import { Server } from 'http';
 
 try {
   mongoose.connect(mongoURI, {
