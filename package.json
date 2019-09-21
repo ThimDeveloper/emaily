@@ -15,7 +15,8 @@
     "server-build": "npm run clean && babel -d ./dist ./src",
     "client-build": "npm install --prefix client && npm run build --prefix client",
     "test-build": "npm run client-build && npm run server-build",
-    "build": "npm run client-build && npm run server-build",
+    "build": "npm run server-build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "start": "node dist/index.js",
     "test": "npm run test-build && export NODE_ENV=test && node dist/index.js"
   },
