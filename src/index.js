@@ -42,9 +42,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-withProductionClient(app);
 withAuthRoutes(app);
 withBillingRoutes(app);
+withProductionClient(app);
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {
