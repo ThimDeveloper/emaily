@@ -27,22 +27,15 @@ passport.use(
       proxy: true
     },
     // Obtain the user information and save it to a database
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleID: profile.id }).then(existingUser => {
-        if (existingUser) {
-          //console.log('User already exists.');
-          done(null, existingUser);
-        } else {
-          // profile.id is the google user id
-          new User({
-            googleID: profile.id
-          })
-            .save()
-            .then(user => {
-              done(null, user);
-            });
-        }
-      });
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleID: profile.id });
+      if (existingUser) {
+        //console.log('User already exists.');
+        return done(null, existingUser);
+      }
+      // profile.id is the google user id
+      const user = await new User({ googleID: profile.id }).save();
+      done(null, user);
     }
   )
 );

@@ -6,7 +6,7 @@ module.exports = app => {
     console.log('Using production build of client and server.');
     app.use(express.static(path.join(__dirname, '../../client/build')));
   } else if (process.env.NODE_ENV === 'test') {
-    console.log('Testing production build of client and server.');
+    console.logn('Testing production build of client and server.');
     app.use(express.static(path.join(__dirname, '../../client/build')));
   } else {
     console.log('Using development client and server.');
