@@ -25,6 +25,17 @@ const surveySchema = new Schema({
   no: {
     type: Number,
     default: 0
+  },
+  // Reference to a unique user id owning the survey record (underscore indicates that this is a relationship field)
+  _user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  dateSent: {
+    type: Date
+  },
+  lastResponded: {
+    type: Date
   }
 });
 

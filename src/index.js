@@ -11,6 +11,7 @@ import './services/passport';
 import { mongoURI, cookieKey } from './config/keys';
 import withAuthRoutes from './routes/authRoutes';
 import withBillingRoutes from './routes/billingRoutes';
+import withSurveyRoutes from './routes/surveyRoutes';
 import withProductionClient from './routes/withProductionClient';
 
 try {
@@ -44,6 +45,7 @@ app.use(passport.session());
 
 withAuthRoutes(app);
 withBillingRoutes(app);
+withSurveyRoutes(app);
 withProductionClient(app);
 
 const PORT = process.env.PORT || 5000;
