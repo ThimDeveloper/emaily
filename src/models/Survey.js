@@ -4,19 +4,19 @@ import RecipientSchema from './Recipient';
 const surveySchema = new Schema({
   title: {
     type: String,
-    required
+    required: true
   },
   body: {
     type: String,
-    required
+    required: true
   },
   subject: {
     type: String,
-    required
+    required: true
   },
   recipients: {
     type: [RecipientSchema],
-    required
+    required: true
   },
   yes: {
     type: Number,

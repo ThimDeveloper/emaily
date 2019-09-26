@@ -22,10 +22,10 @@ module.exports = app => {
   app.get('/api/current_user', (req, res) => {
     if (req.user) {
       console.log('Showing current user info.');
-      res.send(req.user);
+      return res.send(req.user);
     } else {
       console.log('User is not logged in.');
-      res.send(req.user);
+      return res.send(req.user);
     }
   });
 

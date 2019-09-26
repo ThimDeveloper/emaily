@@ -53,16 +53,19 @@ const server = app.listen(PORT, () => {
   console.log(`App is listening on port: ${PORT}`);
 });
 
-process.on('uncaughtException', () => {
+process.on('uncaughtException', e => {
   console.log('Uncaught Exception Detected!');
+  console.error(e);
   server.close();
 });
-process.on('exit', () => {
+process.on('exit', e => {
   console.log('Exit Detected');
+  console.error(e);
   server.close();
 });
 
-process.on('SIGTERM', () => {
+process.on('SIGTERM', e => {
   console.log('Signal Terminate Detected');
+  console.error(e);
   server.close();
 });
