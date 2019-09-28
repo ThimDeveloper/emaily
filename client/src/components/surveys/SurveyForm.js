@@ -44,7 +44,7 @@ const validate = values => {
   // If error object is empty redux form will continue
   const errors = {};
 
-  errors.emails = validateEmails(values.emails || '');
+  errors.recipients = validateEmails(values.recipients || '');
 
   _.each(formFields, ({ name }) => {
     if (!values[name]) {

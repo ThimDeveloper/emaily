@@ -3,9 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import formFields from './formFields';
+import { withRouter } from 'react-router-dom';
 import * as actions from './../../actions';
 
-const SurveyFormReview = ({ onCancel, formValues, submitSurvey }) => {
+const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
   const reviewFields = _.map(formFields, ({ name, label }) => (
     <div key={name}>
       <label>{label}</label>
@@ -24,7 +25,8 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey }) => {
         <i className="material-icons right">arrow_back</i>
       </button>
       <button
-        onClick={() => submitSurvey(formValues)}
+        // History object allows us to navigate front end application from actions creators.
+        onClick={() => submitSurvey(formValues, history)}
         className="teal white-text btn-flat right"
       >
         Send Survey
@@ -45,4 +47,4 @@ const mapStateToProps = ({
 export default connect(
   mapStateToProps,
   actions
-)(SurveyFormReview);
+)(withRouter(SurveyFormReview));
