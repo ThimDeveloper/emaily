@@ -15,6 +15,7 @@ import withSurveyRoutes from './routes/surveyRoutes';
 import withProductionClient from './routes/withProductionClient';
 
 try {
+  mongoose.Promise = global.Promise;
   mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true

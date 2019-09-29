@@ -10,13 +10,24 @@ import surveyTemplate from './../services/emailTemplates/surveyTemplate';
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
-  app.get('/api/surveys/thanks', (req, res) => {
+  app.get('/api/surveys', requireLogin, async (req, res) => {
+    try {
+      const userId = req.user.id;
+      const surveys = await Survey.find({ _user: userId }).select({
+        recipients: false
+      });
+      res.status(200).send(surveys);
+    } catch (err) {
+      res.status(404).send(err);
+    }
+  });
+  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.status(200).send('<h1>Thanks for voting!</h1>');
   });
 
   app.post('/api/surveys/webhooks', (req, res) => {
     const p = new Path('/api/surveys/:surveyId/:choice');
-    const events = _.chain(req.body)
+    _.chain(req.body)
       .map(({ url, email }) => {
         // Match will be null or a variable
         const match = p.test(new URL(url).pathname);
@@ -26,9 +37,22 @@ module.exports = app => {
       })
       .compact()
       .uniqBy('email', 'surveyId')
+      .each(({ surveyId, email, choice }) => {
+        Survey.updateOne(
+          {
+            _id: surveyId,
+            recipients: {
+              $elemMatch: { email: email, responded: false }
+            }
+          },
+          {
+            $inc: { [choice]: 1 },
+            $set: { 'recipients.$.responded': true },
+            lastResponded: new Date()
+          }
+        ).exec();
+      })
       .value();
-
-    console.log(events);
     res.send({});
   });
 
